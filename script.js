@@ -3,7 +3,6 @@
     let timing = false;
     function timer() {
         if (timing === false) { return; }
-        // console.log("timing is ", timing);
         const tr = document.getElementById("timer");
         const int = setInterval(() => {
             let min = Math.floor(time / 60), sec = time % 60;
@@ -12,9 +11,6 @@
         }, 1000);
     }
 
-    // document.getElementById("profile").addEventListener("click", profile);
-    // document.getElementById("playFriend").addEventListener("click", playFriend);
-    // document.getElementById("goHome").addEventListener("click", goHome);
     document.getElementById("menu").addEventListener("click", menu);
     document.getElementById("newGame").addEventListener("click", new_game);
 
