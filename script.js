@@ -55,7 +55,6 @@
         document.getElementById("wrapper").style.width = document.getElementById("wrapper").style.height = wh + "vh";
         document.getElementById("wrapper").style.fontSize = `${fs}em`;
         document.getElementById("right").style.left = `${lr[0]}vw`;
-        document.getElementById("left").style.left = `${lr[1]}vw`;
         document.getElementById("score").style.display = "block";
         document.getElementById("wordsMade").style.display = "block";
         menu();

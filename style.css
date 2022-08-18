@@ -28,7 +28,19 @@ polygon {
     width: 100vw;
     height: 100vh;
 }
-
+#newGame {
+    font-size:2rem;
+    padding:1rem 2rem;
+    width:fit-content;
+    border-radius:3rem;
+    transform-origin:bottom right;
+    transform:rotateZ(-90deg);
+    outline: 2px solid var(--white);
+}
+#newGame:hover {
+    background-color: var(--white);
+    color:#222;
+}
 #homescreen {
     position:fixed;
     top:0;
@@ -73,26 +85,26 @@ li.opt {
     position: fixed;
     top: 3px;
     right: 0;
-    /* width: 32px;
-    height: 32px; */
-    transform: scale(0.8);
-    padding:5px;
+    width:3rem;
+    height:3rem;
+    margin:20px;
     z-index: 35;
     cursor: pointer;
 }
-
+#menu>svg {
+    width:90%;
+    height:90%;
+}
+#menu>svg>line {
+    stroke: #ffffff;
+    stroke-width: 3px;
+    transition: all 0.2s linear;
+    stroke-linecap: round;
+}
 button {
     cursor: pointer;
     background-color: #00000045;
     border: none;
-}
-
-
-#menu>svg>line {
-    stroke: #ffffffaa;
-    stroke-width: 3px;
-    transition: all 0.2s linear;
-    stroke-linecap: round;
 }
 
 #l_0 {
@@ -123,17 +135,20 @@ canvas {
 
 #left {
     top: 0;
-    left: 25vw;
+    left:0;
+    width:100vw;
+    height:50vh;
 }
 
 #right, #left {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50vw;
+    width: 100vw;
     height: 100vh;
     position: fixed;
-    transition: left 0.3s linear;
+    top:0;
+    left:0;
 }
 
 #words {
@@ -182,9 +197,9 @@ canvas {
 
 #timer {
     position: fixed;
-    top: 0.5em;
-    left: 0.5em;
-    font-size: 2em;
+    top: 0.25em;
+    left: 0.25em;
+    font-size: 3em;
     user-select: none;
     color: var(--white);
 }
@@ -196,7 +211,6 @@ canvas {
     gap: 5px;
     width: calc(min(45vw, 55vh));
     height: calc(min(45vw, 55vh));
-    font-size: 3.3em;
     transition: all 0.3s linear;
 }
 
@@ -269,10 +283,9 @@ canvas {
 .inviz {
     display:hidden;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 400px) {
     #right {
         top: 65vh;
-        left: 0;
         height: 35vh;
     }
 
@@ -280,6 +293,7 @@ canvas {
         top: 0;
         left: 0;
         height: 65vh;
+        width:100vw;
     }
 
     #right, #left {
@@ -291,7 +305,7 @@ canvas {
     }
 
     .cell {
-        font-size: 3em;
+        font-size: 2.5rem;
     }
 
     #tempWord {
@@ -301,7 +315,7 @@ canvas {
 
     #timer {
         top: 0;
-        font-size: 1.2em;
+        font-size: 2em;
     }
 
     #wordsMade {
