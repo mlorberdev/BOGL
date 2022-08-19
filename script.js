@@ -1,21 +1,21 @@
 !(function main() {
-    
-    let timing = false;
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const dictionaries = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z];
+    const points = [1, 4, 4, 2, 1, 4, 3, 3, 1, 10, 5, 2, 4, 2, 1, 4, 10, 1, 1, 1, 2, 5, 4, 8, 3, 10];
+    const connected = [[4, 5, 1], [0, 4, 5, 6, 2], [1, 3, 5, 6, 7], [2, 6, 7], [0, 1, 5, 8, 9], [0, 1, 2, 4, 6, 8, 9, 10], [1, 2, 3, 5, 7, 9, 10, 11], [2, 3, 6, 10, 11], [4, 5, 9, 12, 13], [4, 5, 6, 8, 10, 12, 13, 14], [5, 6, 7, 9, 11, 13, 14, 15], [6, 7, 10, 14, 15], [8, 9, 13], [8, 9, 10, 12, 14], [9, 10, 11, 13, 15], [10, 11, 14]];
+    let pp = [], tempWord = [], wordList = [], score = 0, inputs = [], board, ttt = document.getElementById("tempWord");
+    let timing = false, time = 180;
+
     function timer() {
-        if (timing === false) { return; }
+        if (timing === false) {return}
         const tr = document.getElementById("timer");
         const int = setInterval(() => {
             let min = Math.floor(time / 60), sec = time % 60;
+            if (time === 30) tr.style.textShadow = "0 0 10 orangered";
             time === 0 ? endGame(int) : time -= 1;
             sec < 10 ? tr.textContent = `${min}:0${sec}` : tr.textContent = `${min}:${sec}`;
         }, 1000);
-    }
-
-    document.getElementById("menu").addEventListener("click", menu);
-    document.getElementById("newGame").addEventListener("click", new_game);
-
-    function sleep(ms) {
-        return new Promise(e => setTimeout(e, ms))
     }
 
     function pick_dice() {
@@ -33,31 +33,13 @@
         return bb;
     }
 
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const dictionaries = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z];
-    const points = [1, 4, 4, 2, 1, 4, 3, 3, 1, 10, 5, 2, 4, 2, 1, 4, 10, 1, 1, 1, 2, 5, 4, 8, 3, 10];
-    const connected = [[4, 5, 1], [0, 4, 5, 6, 2], [1, 3, 5, 6, 7], [2, 6, 7], [0, 1, 5, 8, 9], [0, 1, 2, 4, 6, 8, 9, 10], [1, 2, 3, 5, 7, 9, 10, 11], [2, 3, 6, 10, 11], [4, 5, 9, 12, 13], [4, 5, 6, 8, 10, 12, 13, 14], [5, 6, 7, 9, 11, 13, 14, 15], [6, 7, 10, 14, 15], [8, 9, 13], [8, 9, 10, 12, 14], [9, 10, 11, 13, 15], [10, 11, 14]];
-    let pp = [], tempWord = [], wordList = [], score = 0, inputs = [], board, ttt = document.getElementById("tempWord");
-
     async function new_game() {
-        await sleep(1);
 
-        let wh = 40, lr = [100, 25], fs = 2.5;
-        if (!document.getElementById("hideWords").checked) { wh = 30, lr = [50, 0], fs = 2; }
-        let gt = document.getElementsByName("timeGroup");
-        for (let i = 0; i < gt.length; i++) { if (gt[i].checked) { time = gt[i].value; break } }
-        // RESETS
+        timing = false;
         board = pick_dice(); pp = [];
+        document.getElementById("addTime").addEventListener("click", () => timing === false ? timing = false : time += 60);
         document.getElementById("numWordsMade").innerHTML = "0";
         document.getElementById("words").innerHTML = "";
-        document.getElementById("words").style.color = "rgba(255, 255, 255, 0)";
-        document.getElementById("score").innerHTML = "0";
-        document.getElementById("wrapper").style.width = document.getElementById("wrapper").style.height = wh + "vh";
-        document.getElementById("wrapper").style.fontSize = `${fs}em`;
-        document.getElementById("right").style.left = `${lr[0]}vw`;
-        document.getElementById("score").style.display = "block";
-        document.getElementById("wordsMade").style.display = "block";
-        menu();
         
         let possible = [];
         let k = 0;
@@ -136,9 +118,8 @@
         }
         setupBoard();
     }
-
-    function setupBoard() {
-        // console.log(timing);
+    new_game();
+    async function setupBoard() {
         let bs = "";
         timing = true;
         timer();
@@ -264,6 +245,7 @@
 
     // ANIMATE SCORE INCREASE
     function increaseScore(l, tempScore) {
+        let sc = document.getElementById("score");
         switch (true) {
             case (l === 5): tempScore *= 2; break;
             case (l === 6): tempScore *= 3; break;
@@ -276,59 +258,20 @@
             }
             score++;
             tempScore--;
-            document.getElementById("score").innerHTML = score;
-        }, 20);
+            sc.innerHTML = score;
+        }, 80);
     }
 
     // END GAME
     function endGame() {
         timing = false;
-        document.getElementById("words").innerHTML = `<span>${pp.toString().split(',').join(',&nbsp</span><span>')}</span>`;
-        document.getElementById("words").style.color = "rgba(255, 255, 255, 0.4)";
-        document.getElementById("wrapper").style.width = document.getElementById("wrapper").style.height = "30vw";
-        document.getElementById("wrapper").style.fontSize = "2em";
-        document.getElementById("right").style.left = "50vw";
-        document.getElementById("left").style.left = "0";
+        let wrds = document.getElementById("words");
+        wrds.innerHTML = `<span>${pp.toString().split(',').join(',&nbsp</span><span>')}</span>`;
+        wrds.style.color = "rgba(255, 255, 255, 0.4)";
+        wrds.style.display = "flex";
         for (let i = 0; i < 16; i++) {
             document.getElementById(`c${i}`).removeEventListener("mousedown", makeWord);
         }
-    }
-
-    // PROFILE
-    function profile() {
-        document.getElementById("mainMenu").classList.add("hide");
-        document.getElementById("profileMenu").classList.remove("hide");
-        console.log("profile");
-    }
-
-    // PLAY FRIEND
-    function playFriend() {
-        let pf = pick_dice();
-        console.log(pf);
-    }
-
-    // RETURN TO MAIN MENU
-    function goHome() {
-        document.getElementById("profileMenu").classList.add("hide");
-        document.getElementById("mainMenu").classList.remove("hide");
-    }
-
-    function menu() {
-        let hs = document.getElementById("homescreen");
-        if (hs.classList.contains("open")) {
-            hs.style.display = "none"; // close menu
-            hs.classList.toggle("open");
-            document.getElementById("l_0").style.transform = "rotate(0deg)";
-            document.getElementById("l_2").style.transform = "rotate(0deg)";
-            document.getElementById("l_1").style.opacity = "1";
-        } else {
-            hs.style.display = "flex"; // open menu
-            hs.classList.toggle("open");
-            document.getElementById("l_0").style.transform = "rotate(43deg)";
-            document.getElementById("l_2").style.transform = "rotate(-43deg)";
-            document.getElementById("l_1").style.opacity = "0";
-        }
-    }
- 
+    } 
 
 })();
