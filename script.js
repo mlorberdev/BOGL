@@ -5,14 +5,14 @@
     const points = [1, 4, 4, 2, 1, 4, 3, 3, 1, 10, 5, 2, 4, 2, 1, 4, 10, 1, 1, 1, 2, 5, 4, 8, 3, 10];
     const connected = [[4, 5, 1], [0, 4, 5, 6, 2], [1, 3, 5, 6, 7], [2, 6, 7], [0, 1, 5, 8, 9], [0, 1, 2, 4, 6, 8, 9, 10], [1, 2, 3, 5, 7, 9, 10, 11], [2, 3, 6, 10, 11], [4, 5, 9, 12, 13], [4, 5, 6, 8, 10, 12, 13, 14], [5, 6, 7, 9, 11, 13, 14, 15], [6, 7, 10, 14, 15], [8, 9, 13], [8, 9, 10, 12, 14], [9, 10, 11, 13, 15], [10, 11, 14]];
     let pp = [], tempWord = [], wordList = [], score = 0, inputs = [], board, ttt = document.getElementById("tempWord");
-    let timing = false, time = 180;
+    let timing = false, time = 12;
 
     function timer() {
         if (timing === false) {return}
         const tr = document.getElementById("timer");
         const int = setInterval(() => {
             let min = Math.floor(time / 60), sec = time % 60;
-            if (time === 30) tr.style.textShadow = "0 0 10 orangered";
+            time <= 10 ? tr.style.color = "#f1619d" : tr.style.color = "var(--dark)";
             time === 0 ? endGame(int) : time -= 1;
             sec < 10 ? tr.textContent = `${min}:0${sec}` : tr.textContent = `${min}:${sec}`;
         }, 1000);

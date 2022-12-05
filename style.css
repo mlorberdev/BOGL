@@ -3,7 +3,7 @@
 }
 
 :root {
-	--dark: #222;
+	--dark: #ccc;
 }
 
 body {
@@ -37,14 +37,14 @@ body {
 	display:none;
 } */
 label > input:checked {
-	background-color: red;
+	background-color: #f1619d;
 	color:white;
 }
 
 button {
 	cursor: pointer;
 	background-color: #00000045;
-	color:#888;
+	color:#ccc;
 	border: none;
 }
 
