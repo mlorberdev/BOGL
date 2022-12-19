@@ -1,5 +1,5 @@
 !(function main() {
-
+    console.log("load mainjs");
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const dictionaries = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z];
     const points = [1, 4, 4, 2, 1, 4, 3, 3, 1, 10, 5, 2, 4, 2, 1, 4, 10, 1, 1, 1, 2, 5, 4, 8, 3, 10];
@@ -136,12 +136,13 @@
     function listen() {
         for (let i = 0; i < 16; i++) {
             // document.getElementById(`c${i}`).addEventListener("mousedown", makeWord);
-            $(`#c${i}`).on("mousedown vmousedown", makeWord);
+            $(`#c${i}`).on("mousedown touchstart", makeWord);
         }
     }
 
     // ON POINTER DOWN, MAKING WORD FROM POINTEROVER LETTERS
     function makeWord() {
+        console.log(this.id);
         inputs.push(Number(this.id.toString().split('c')[1]));
         let tempLetter = this.innerText;
         tempWord.push(tempLetter);
@@ -149,13 +150,14 @@
         this.parentElement.classList.add("used");
         for (let i = 0; i < 16; i++) {
             // document.getElementById(`c${i}`).addEventListener("mouseover", concat);
-            $(`#c${i}`).on("mouseover vmouseover", concat);
+            $(`#c${i}`).on("mouseover touchenter", concat);
         }
         // window.addEventListener("mouseup", stopMakeword);
-        $(window).on("mouseup vmouseup", stopMakeword);
+        $(window).on("mouseup touchend", stopMakeword);
     }
 
     function concat() {
+        console.log(this.id);
         let x = Number(this.id.toString().split('c')[1]);
         if (connected[inputs[inputs.length - 1]].includes(x) && !document.getElementById(this.id).parentElement.classList.contains("used")) {
             inputs.push(x);
@@ -227,14 +229,14 @@
         // remove listeners
         for (let i = 0; i < 16; i++) {
             // document.getElementById(`c${i}`).removeEventListener("mouseover", concat);
-            $(`#c${i}`).off("mouseover vmouseover", concat);
+            $(`#c${i}`).off("mouseover touchenter", concat);
             document.getElementById(`c${i}`).parentElement.classList.remove("used");
         }
         ttt.innerText = "";
         tempWord = [];
         inputs = [];
         // window.removeEventListener("mouseup", stopMakeword);
-        $(window).off("mouseup vmouseup", stopMakeword);
+        $(window).off("mouseup touchend", stopMakeword);
     }
 
     // HIGHLIGHT MADE WORD IN words
@@ -276,7 +278,7 @@
         wrds.style.display = "flex";
         for (let i = 0; i < 16; i++) {
             // document.getElementById(`c${i}`).removeEventListener("mousedown", makeWord);
-            $(`#c${i}`).off("mousedown vmousedown", makeWord);
+            $(`#c${i}`).off("mousedown touchstart", makeWord);
         }
     } 
 
