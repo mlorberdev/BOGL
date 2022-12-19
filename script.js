@@ -135,7 +135,8 @@
 
     function listen() {
         for (let i = 0; i < 16; i++) {
-            document.getElementById(`c${i}`).addEventListener("pointerdown", makeWord);
+            // document.getElementById(`c${i}`).addEventListener("mousedown", makeWord);
+            $(`#c${i}`).on("mousedown vmousedown", makeWord);
         }
     }
 
@@ -147,9 +148,11 @@
         ttt.innerText += tempLetter;
         this.parentElement.classList.add("used");
         for (let i = 0; i < 16; i++) {
-            document.getElementById(`c${i}`).addEventListener("pointerover", concat);
+            // document.getElementById(`c${i}`).addEventListener("mouseover", concat);
+            $(`#c${i}`).on("mouseover vmouseover", concat);
         }
-        window.addEventListener("pointerup", stopMakeword);
+        // window.addEventListener("mouseup", stopMakeword);
+        $(window).on("mouseup vmouseup", stopMakeword);
     }
 
     function concat() {
@@ -223,13 +226,15 @@
         }
         // remove listeners
         for (let i = 0; i < 16; i++) {
-            document.getElementById(`c${i}`).removeEventListener("pointerover", concat);
+            // document.getElementById(`c${i}`).removeEventListener("mouseover", concat);
+            $(`#c${i}`).off("mouseover vmouseover", concat);
             document.getElementById(`c${i}`).parentElement.classList.remove("used");
         }
         ttt.innerText = "";
         tempWord = [];
         inputs = [];
-        window.removeEventListener("pointerup", stopMakeword);
+        // window.removeEventListener("mouseup", stopMakeword);
+        $(window).off("mouseup vmouseup", stopMakeword);
     }
 
     // HIGHLIGHT MADE WORD IN words
@@ -270,7 +275,8 @@
         wrds.style.color = "rgba(255, 255, 255, 0.4)";
         wrds.style.display = "flex";
         for (let i = 0; i < 16; i++) {
-            document.getElementById(`c${i}`).removeEventListener("pointerdown", makeWord);
+            // document.getElementById(`c${i}`).removeEventListener("mousedown", makeWord);
+            $(`#c${i}`).off("mousedown vmousedown", makeWord);
         }
     } 
 
