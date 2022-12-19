@@ -135,11 +135,11 @@
 
     function listen() {
         for (let i = 0; i < 16; i++) {
-            document.getElementById(`c${i}`).addEventListener("mousedown", makeWord);
+            document.getElementById(`c${i}`).addEventListener("pointerdown", makeWord);
         }
     }
 
-    // ON MOUSE DOWN, MAKING WORD FROM MOUSEOVER LETTERS
+    // ON POINTER DOWN, MAKING WORD FROM POINTEROVER LETTERS
     function makeWord() {
         inputs.push(Number(this.id.toString().split('c')[1]));
         let tempLetter = this.innerText;
@@ -147,9 +147,9 @@
         ttt.innerText += tempLetter;
         this.parentElement.classList.add("used");
         for (let i = 0; i < 16; i++) {
-            document.getElementById(`c${i}`).addEventListener("mouseover", concat);
+            document.getElementById(`c${i}`).addEventListener("pointerover", concat);
         }
-        window.addEventListener("mouseup", stopMakeword);
+        window.addEventListener("pointerup", stopMakeword);
     }
 
     function concat() {
@@ -223,13 +223,13 @@
         }
         // remove listeners
         for (let i = 0; i < 16; i++) {
-            document.getElementById(`c${i}`).removeEventListener("mouseover", concat);
+            document.getElementById(`c${i}`).removeEventListener("pointerover", concat);
             document.getElementById(`c${i}`).parentElement.classList.remove("used");
         }
         ttt.innerText = "";
         tempWord = [];
         inputs = [];
-        window.removeEventListener("mouseup", stopMakeword);
+        window.removeEventListener("pointerup", stopMakeword);
     }
 
     // HIGHLIGHT MADE WORD IN words
@@ -270,7 +270,7 @@
         wrds.style.color = "rgba(255, 255, 255, 0.4)";
         wrds.style.display = "flex";
         for (let i = 0; i < 16; i++) {
-            document.getElementById(`c${i}`).removeEventListener("mousedown", makeWord);
+            document.getElementById(`c${i}`).removeEventListener("pointerdown", makeWord);
         }
     } 
 
