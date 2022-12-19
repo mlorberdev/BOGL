@@ -217,6 +217,7 @@ button:hover {
 		top:5vh;
 		left:5vw;
 	}
+	#score,
 	#timer,
 	#wordsMade {
 		font-size:3rem;
