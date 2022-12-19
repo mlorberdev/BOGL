@@ -18,33 +18,36 @@ body {
 	color: var(--dark);
 	background-color: #444;
 }
+
 #logo {
-	position:fixed;
-	top:1rem;
-	left:1rem;
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
 }
+
 #options {
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	position: fixed;
 	top: 0;
-	right:0;
-	color:#222;
+	right: 0;
+	color: #222;
 	z-index: 30;
-	margin:1rem;
+	margin: 1rem;
 }
+
 /* input {
 	display:none;
 } */
-label > input:checked {
+label>input:checked {
 	background-color: #f1619d;
-	color:white;
+	color: white;
 }
 
 button {
 	cursor: pointer;
 	background-color: #00000045;
-	color:#ccc;
+	color: #ccc;
 	border: none;
 }
 
@@ -64,8 +67,8 @@ main {
 	flex-wrap: wrap;
 	max-width: 80vw;
 	max-height: 35vh;
-	position:fixed;
-	bottom:2rem;
+	position: fixed;
+	bottom: 2rem;
 	overflow-y: scroll;
 	scroll-behavior: smooth;
 	white-space: nowrap;
@@ -91,14 +94,16 @@ main {
 	color: var(--dark);
 	font-weight: bolder;
 }
+
 #wordsMade {
 	font-size: 3rem;
 }
+
 #scoreWrap {
 	position: fixed;
 	top: 15vh;
 	left: 15vw;
-	display:flex;
+	display: flex;
 	flex-direction: column;
 }
 
@@ -124,13 +129,15 @@ main {
 }
 
 button {
-	padding:1rem 2rem;
-	font-size:1.3rem;
-	border:2px solid #444;
+	padding: 1rem 2rem;
+	font-size: 1.3rem;
+	border: 2px solid #444;
 }
+
 button:hover {
-	border:2px solid #888;
+	border: 2px solid #888;
 }
+
 .cell {
 	z-index: 2;
 	display: flex;
@@ -140,7 +147,7 @@ button:hover {
 	width: 100%;
 	height: 100%;
 	transition: all 0.3s linear;
-	font-size:3rem;
+	font-size: 3rem;
 }
 
 .used {
@@ -182,4 +189,36 @@ button:hover {
 
 .hide {
 	display: none;
+}
+
+@media screen and (max-width:768px) {
+	#wrapper {
+		width:calc(min(75vw, 75vh));
+		height: calc(min(75vw, 75vh));
+		position:fixed;
+		top:35vh;
+	}
+	#words {
+		display: none;
+		flex-wrap: wrap;
+		max-width: 90vw;
+		max-height: 20vh;
+	}
+	#logo {
+		width:20vw;
+	}
+	#options > button {
+		font-size:1rem;
+		padding:.75rem .75rem;
+		margin-bottom:.5rem;
+		border-radius:1.4rem;
+	}
+	#scoreWrap {
+		top:5vh;
+		left:5vw;
+	}
+	#timer,
+	#wordsMade {
+		font-size:3rem;
+	}
 }
